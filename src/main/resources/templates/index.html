@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="common :: meta_header('ログイン',~{::link},~{::script})">
+</head>
+<body>
+  <div th:replace="common :: nav('ログイン')"></div>
+  <div th:replace="common :: alert"></div>
+  <div class="container">
+    <main class="form-wrapper rounded shadow">
+      <form method="post" th:action="@{/login}" class="w-100 m-auto">
+        <h1 class="h3 mb-3 fw-normal text-center">ログイン</h1>
+        <div class="form-floating mb-2">
+          <input type="email" name="username" class="form-control" placeholder="name@example.com">
+          <label for="floatingInput">メールアドレス</label>
+        </div>
+        <div class="form-floating mb-2">
+          <input type="password" name="password" class="form-control" placeholder="Password">
+          <label for="floatingPassword">パスワード</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">ログイン</button>
+      </form>
+    <main>  
+  </div>
+</body>
+</html>
