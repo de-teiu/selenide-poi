@@ -1,5 +1,7 @@
 package common;
 
+import java.io.File;
+
 import lombok.Data;
 
 /**
@@ -9,19 +11,19 @@ import lombok.Data;
  */
 @Data
 public class Evidence {
-	
+
 	/**
 	 * コンストラクタ
 	 * @param fileName ファイル名
 	 * @param comment コメント
 	 */
-	public Evidence(String fileName, String comment) {
-		this.fileName = fileName;
+	public Evidence(File file, String comment) {
+		this.file = file;
 		this.comment = comment;
 	}
-	
+
 	/** スクリーンショットのファイル名 */
-	private String fileName;
+	private File file;
 	/** ファイルに対応するコメント */
 	private String comment;
 }
