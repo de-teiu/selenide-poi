@@ -1,0 +1,111 @@
+﻿# A5:ER FORMAT:16
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright © 2007 m.matsubara
+# A5:SQL Mk-2 Version 2.17.4 Copyright © 1997 - 2022 m.matsubara
+#  https://a5m2.mmatsubara.com
+
+[Manager]
+ProjectName=sample
+Author=de_teiu_tkg
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",2,"A3Landscape",$FFFFFF
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=2
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=12
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=6
+RDBMSTypeName=PostgreSQL
+GenerateDropTableStatement=1
+DropTableIfExists=1
+BackupRestoreTempTable=0
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+UpperCaseKeyword=0
+ShowTag=1
+ShowCommonAttributes=0
+BugFixEntityWidth=1
+
+[Entity]
+PName=role_master
+LName=権限マスタ
+Comment=
+TableOption=
+Page=Main
+Left=600
+Top=300
+Field="権限ID","id","integer","NOT NULL",0,"","",$FFFFFFFF,""
+Field="権限名","name","varchar(20)","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20221022121804
+Position="Main",600,300
+ZOrder=1
+
+[Entity]
+PName=user_master
+LName=ユーザーマスタ
+Comment=
+TableOption=
+Page=Main
+Left=1050
+Top=250
+Field="ユーザーID","id","serial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ユーザー名","name","varchar(30)","NOT NULL",,"","",$FFFFFFFF,""
+Field="メールアドレス","mail","varchar(100)","NOT NULL",,"","",$FFFFFFFF,""
+Field="パスワード","password","varchar(128)","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20221022122012
+Position="Main",1050,250
+ZOrder=2
+
+[Entity]
+PName=user_role_master
+LName=ユーザー権限マスタ
+Comment=
+TableOption=
+Page=Main
+Left=550
+Top=650
+Field="ユーザーID","user_id","Integer","NOT NULL",0,"","",$FFFFFFFF,""
+Field="権限ID","role_id","Integer","NOT NULL",1,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20221022122114
+Position="Main",550,650
+ZOrder=3
+
+[View]
+PName=user_role_view
+LName=ユーザー権限ビュー
+Comment=
+ViewOption=
+Query=select\n  user_id\n  , role_id\n  , rm.name as role_name \nfrom\n  user_role_master urm \n  inner join role_master rm \n    on urm.role_id = rm.id\n
+LNameByComment=1
+Color=$000000
+BkColor=$FFFFFF
+Position="Main",1600,250
+ZOrder=5
+Page=Main
+Left=1600
+Top=250
