@@ -1,10 +1,14 @@
 package common;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.jupiter.api.AfterEach;
 
 import com.codeborne.selenide.Configuration;
@@ -21,7 +25,7 @@ public class TestBase {
 	 * テストメソッドが実行終了するたびに呼び出されるメソッド
 	 */
 	@AfterEach
-	void finishTest() {
+	void finishTestMethod() {
 		Selenide.clearBrowserCookies();
 	}
 
@@ -82,5 +86,30 @@ public class TestBase {
 		evidences.forEach(evidence -> {
 			evidence.getFile().delete();
 		});
+	}
+
+	/**
+	 * Excelファイルからテンプレートシートを削除
+	 * @param fileName ファイル名
+	 */
+	protected static void removeTemplateSheetFromWorkbook(String fileName) {
+		String filePath = getOutputDirectoryPath() + File.separator + fileName + ".xlsx";
+		Workbook workbook = null;
+		File file = new File(filePath);
+		try {
+			workbook = new XSSFWorkbook(new FileInputStream(file));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int templateSheetIndex = workbook.getSheetIndex("template");
+		if (templateSheetIndex >= 0) {
+			workbook.removeSheetAt(templateSheetIndex);
+		}
+		try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
+			workbook.write(fileOutputStream);
+		} catch (IOException e) {
+			e.printStackTrace();
+			;
+		}
 	}
 }

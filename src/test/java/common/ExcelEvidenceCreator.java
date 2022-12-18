@@ -66,12 +66,6 @@ public class ExcelEvidenceCreator {
 			}
 		}
 
-		//templateシートを削除
-		int templateSheetIndex = workbook.getSheetIndex("template");
-		if (templateSheetIndex >= 0) {
-			workbook.removeSheetAt(templateSheetIndex);
-		}
-
 		//ワークブックをファイルに出力
 		try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
 			workbook.write(fileOutputStream);
@@ -141,7 +135,7 @@ public class ExcelEvidenceCreator {
 		int imageWidth = image.getWidth();
 		int imageHeight = image.getHeight();
 		ClientAnchor anchor = sheet.getWorkbook().getCreationHelper().createClientAnchor();
-		//画像挿入位置・サイズを指定 
+		//画像挿入位置・サイズを指定
 		anchor.setCol1(col);
 		anchor.setRow1(row);
 		int endCol = col + imageWidth / CELL_SIZE;

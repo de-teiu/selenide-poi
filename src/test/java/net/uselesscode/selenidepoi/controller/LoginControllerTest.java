@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.OutputType;
@@ -22,7 +23,7 @@ import common.TestBase;
 class LoginControllerTest extends TestBase {
 
 	/** 証跡Excelのファイル名 */
-	private final String EVIDENCE_FILE_NAME = "証跡_ログイン";
+	private final static String EVIDENCE_FILE_NAME = "証跡_ログイン";
 
 	/** 一般ユーザーメールアドレス */
 	private final String USER_GENERAL_MAIL = "general@example.com";
@@ -40,6 +41,11 @@ class LoginControllerTest extends TestBase {
 	@BeforeAll
 	static void beforeTest() throws IOException {
 		setupClass("/loginTest");
+	}
+
+	@AfterAll
+	static void afterTest() {
+		removeTemplateSheetFromWorkbook(EVIDENCE_FILE_NAME);
 	}
 
 	/**
